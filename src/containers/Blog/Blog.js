@@ -9,12 +9,13 @@ import './Blog.css';
 class Blog extends Component {
     state = {
         posts: [],
-        selectedPostId: null
+        selectedPostId: null,
+        error: false
     };
 
     async componentDidMount() {
         const posts = await this.fetchPosts();
-        this.setState({ posts });
+        posts && this.setState({ posts });
     }
 
     async fetchPosts() {
@@ -22,7 +23,7 @@ class Blog extends Component {
             const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
             return response.data;
         } catch (error) {
-            console.error(error);
+            this.setState({ error: true });
         }
     }
 
@@ -31,7 +32,13 @@ class Blog extends Component {
     }
 
     render () {
-        const posts = this.state.posts.map(post => {
+        let posts;
+
+        if (this.state.error) {
+            posts = <p style={{textAlign: 'center'}}>Something went wrong!</p>
+        }
+
+        posts = this.state.posts.map(post => {
             return (
                 <Post 
                     key={post.id} 
@@ -39,7 +46,7 @@ class Blog extends Component {
                     clicked={() => this.postSelectedHandler(post.id)} />
             );
         });
-        
+
         return (
             <div>
                 <section className="Posts">
