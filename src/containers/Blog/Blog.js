@@ -14,7 +14,7 @@ class Blog extends Component {
 
     async componentDidMount() {
         const posts = await this.fetchPosts();
-        this.setState({ posts });
+        this.setState({ posts }, () => console.log(this.state));
     }
 
     async fetchPosts() {
@@ -23,7 +23,7 @@ class Blog extends Component {
     }
 
     postSelectedHandler(id) {
-        this.setState({selectedPostId: id});
+        this.setState({selectedPostId: id}, () => console.log(this.state));
     }
 
     render () {
