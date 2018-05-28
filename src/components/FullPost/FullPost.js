@@ -21,7 +21,7 @@ class FullPost extends Component {
 
     async fetchPost(id) {
         try {
-            const response = await axios.get('https://jsonplaceholder.typicode.com/posts/' + id);
+            const response = await axios.get('/posts/' + id);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -29,7 +29,7 @@ class FullPost extends Component {
     }
 
     deletePostHandler = (id) => {
-        return axios.delete('https://jsonplaceholder.typicode.com/posts/' + id)
+        return axios.delete('/posts/' + id)
             .then(response => console.log(response))
             .catch(error => console.error(error));
     }

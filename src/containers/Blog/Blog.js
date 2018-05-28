@@ -20,7 +20,7 @@ class Blog extends Component {
 
     async fetchPosts() {
         try {
-            const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+            const response = await axios.get('/posts');
             return response.data;
         } catch (error) {
             this.setState({ error: true });

@@ -17,7 +17,7 @@ class NewPost extends Component {
             autho: this.state.author
         };
         
-        return axios.post('https://jsonplaceholder.typicode.com/posts', post)
+        return axios.post('/posts', post)
             .catch(error => console.error(error));
     }
 
