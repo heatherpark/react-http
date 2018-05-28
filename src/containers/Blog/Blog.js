@@ -14,16 +14,20 @@ class Blog extends Component {
 
     async componentDidMount() {
         const posts = await this.fetchPosts();
-        this.setState({ posts }, () => console.log(this.state));
+        this.setState({ posts });
     }
 
     async fetchPosts() {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-        return response.data;
+        try {
+            const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+            return response.data;
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     postSelectedHandler(id) {
-        this.setState({selectedPostId: id}, () => console.log(this.state));
+        this.setState({selectedPostId: id});
     }
 
     render () {
